@@ -14,7 +14,7 @@ namespace CreationModelPlugin
 {
     #region ЗАНЯТИЕ 6. ПЛАГИН "СОЗДАНИЕ МОДЕЛИ". ЧАСТЬ 3.
     [TransactionAttribute(TransactionMode.Manual)]
-    public class CreationModelPlugin : IExternalCommand
+    public class RoofCreation : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -117,11 +117,11 @@ namespace CreationModelPlugin
             double wallWidth = walls[0].Width;
             double dt = wallWidth / 2;
 
-            double extrusionFirst = -width / 2 - dt; //выдавливание крыши. Начало с одной стороны
-            double extrusionEnd = width / 2 + dt; //выдавливание крыши. Конец с одной стороны
+            double extrusionFirst = -width / 2 - dt - 2; //выдавливание крыши. Начало с одной стороны
+            double extrusionEnd = width / 2 + dt + 2; //выдавливание крыши. Конец с одной стороны
 
-            double curveFirst = -dept / 2 - dt; //начало кривой кровли
-            double curveEnd = dept / 2 + dt; //конец кривой кровли
+            double curveFirst = -dept / 2 - dt - 2; //начало кривой кровли
+            double curveEnd = dept / 2 + dt + 2; //конец кривой кровли
 
             CurveArray curveArray = new CurveArray(); //создаём кривую профиля кровли
             curveArray.Append(Line.CreateBound(new XYZ(0, curveFirst, level2.Elevation), new XYZ(0, 0, level2.Elevation + 10))); //Elevation - базовая высота уровня. new XYZ -создаём новые точки
